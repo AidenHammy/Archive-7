@@ -166,7 +166,7 @@ const MATERIALS = [
   },
 ];
 
-// boot sequence
+// boot
 function bootSequence(lines, onDone) {
   const overlay = document.getElementById("bootOverlay");
   overlay.innerHTML = lines
@@ -179,14 +179,13 @@ function bootSequence(lines, onDone) {
   lines.forEach((l, i) => {
     setTimeout(() => {
       const el = document.getElementById(`bl${i}`);
-      if (el) {
-        el.style.animation = "typein 0.05s forwards";
-        el.querySelector(".cursor").style.display =
-          i === lines.length - 1 ? "none" : "inline-block";
-        if (i > 0)
-          document
-            .getElementById(`bl${i - 1}`)
-            .querySelector(".cursor").style.display = "none";
+      if (!el) return;
+      el.style.animation = "typein 0.05s forwards";
+      el.querySelector(".cursor").style.display =
+        i === lines.length - 1 ? "none" : "inline-block";
+      if (i > 0) {
+        const prev = document.getElementById(`bl${i - 1}`);
+        if (prev) prev.querySelector(".cursor").style.display = "none";
       }
     }, i * 200);
   });
@@ -199,14 +198,65 @@ function bootSequence(lines, onDone) {
   );
 }
 
+// dial svg
+function dialSVG(pct, dialId) {
+  const angleFor = (p) => -120 + (p / 100) * 240;
+  const ticks = Array.from({ length: 13 }, (_, i) => {
+    const a = angleFor(i * (100 / 12));
+    const rad = (a * Math.PI) / 180;
+    const major = i % 3 === 0;
+    const r1 = major ? 30 : 33;
+    const x1 = 50 + r1 * Math.sin(rad),
+      y1 = 50 - r1 * Math.cos(rad);
+    const x2 = 50 + 36 * Math.sin(rad),
+      y2 = 50 - 36 * Math.cos(rad);
+    return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${major ? "#c4a870" : "#6b5836"}" stroke-width="${major ? 1.4 : 0.8}"/>`;
+  }).join("");
+  const serial = `SN-${dialId.toUpperCase()}`;
+  return `
+  <svg width="86" height="86" viewBox="0 0 100 100">
+    <defs>
+      <radialGradient id="${dialId}-bez" cx="35%" cy="30%" r="75%">
+        <stop offset="0%" stop-color="#4a3a26"/><stop offset="55%" stop-color="#2a2015"/><stop offset="100%" stop-color="#150f0a"/>
+      </radialGradient>
+      <radialGradient id="${dialId}-face" cx="45%" cy="38%" r="70%">
+        <stop offset="0%" stop-color="#1c1712"/><stop offset="100%" stop-color="#0c0906"/>
+      </radialGradient>
+      <linearGradient id="${dialId}-glass" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.10)"/><stop offset="35%" stop-color="rgba(255,255,255,0)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      </linearGradient>
+    </defs>
+    <circle cx="50" cy="50" r="48" fill="url(#${dialId}-bez)"/>
+    <circle cx="50" cy="50" r="48" fill="none" stroke="#0a0705" stroke-width="1"/>
+    <circle cx="50" cy="50" r="41" fill="url(#${dialId}-face)"/>
+    ${ticks}
+    <path d="M 26 74 A 34 34 0 1 1 74 74" fill="none" stroke="#a8461f" stroke-opacity="0.55" stroke-width="2.5"/>
+    <line x1="50" y1="50" x2="50" y2="20" stroke="#c0392b" stroke-width="1.6" id="${dialId}-needle" stroke-linecap="round"
+      style="transform-origin:50px 50px; transform: rotate(-120deg); transition: transform 1s cubic-bezier(.2,.8,.2,1);"/>
+    <circle cx="50" cy="50" r="3.2" fill="#8a7248" stroke="#3a2d1e" stroke-width="0.8"/>
+    <circle cx="50" cy="50" r="48" fill="url(#${dialId}-glass)"/>
+    <circle cx="10" cy="10" r="2.4" fill="#5c4a30"/><circle cx="90" cy="10" r="2.4" fill="#5c4a30"/>
+    <circle cx="10" cy="90" r="2.4" fill="#5c4a30"/><circle cx="90" cy="90" r="2.4" fill="#5c4a30"/>
+    <text x="50" y="66" text-anchor="middle" font-size="5" fill="#5a4a34" font-family="monospace">${serial}</text>
+  </svg>`;
+}
+function sweepDial(dialId, pct) {
+  requestAnimationFrame(() => {
+    const needle = document.getElementById(`${dialId}-needle`);
+    if (needle)
+      needle.style.transform = `rotate(${-120 + (pct / 100) * 240}deg)`;
+  });
+}
+
 // database grid
+const meter = (val) =>
+  Array.from(
+    { length: 5 },
+    (_, i) => `<i class="${i < val ? "fill" : ""}"></i>`,
+  ).join("");
+
 const dbGrid = document.getElementById("dbGrid");
 MATERIALS.forEach((m, i) => {
-  const meter = (val) =>
-    Array.from(
-      { length: 5 },
-      (_, i) => `<i class="${i < val ? "fill" : ""}"></i>`,
-    ).join("");
   const card = document.createElement("div");
   card.className = "mat-card";
   card.onclick = () => openDetail(m.id);
@@ -225,79 +275,107 @@ MATERIALS.forEach((m, i) => {
 
 function openDetail(id) {
   const m = MATERIALS.find((x) => x.id === id);
-  bootSequence(
-    [
-      `RETRIEVING RECORD 0${m.id}...`,
-      `VERIFYING STRUCTURAL CLASSIFICATION...`,
-      `RECORD RECOVERED. SEAL INTACT.`,
-    ],
-    () => {
-      document.getElementById("dTitle").textContent = m.name;
-      document.getElementById("dRole").textContent = `ROLE — ${m.role}`;
-      const sealYear = 1927 + ((m.id * 7) % 40);
-      const sealNote = [
-        "RE-SEALED",
-        "CONDITION VERIFIED",
-        "PENDING REVIEW",
-        "RECOVERED INTACT",
-        "PARTIALLY LEGIBLE",
-        "ARCHIVIST APPROVED",
-      ][m.id % 6];
-      document.getElementById("dSeal").innerHTML =
-        `${sealNote}<br>EST. ${sealYear}`;
-      const specs = [
-        ["STRENGTH", m.strength * 20, "rd1"],
-        ["DURABILITY", m.durability * 20, "rd2"],
-        ["WEIGHT", m.weight * 20, "rd3"],
-        ["FLEXIBILITY", m.flexibility * 20, "rd4"],
-      ];
-      document.getElementById("dDials").innerHTML = specs
-        .map(
-          ([l, v, id]) => `
-      <div class="dial-block">${dialSVG(v, id)}<div class="dial-label">${l}</div><div class="dial-val">${v / 20}/5</div></div>
-    `,
-        )
-        .join("");
-      document.getElementById("dPros").innerHTML = m.pros
-        .map((p) => `<li>${p}</li>`)
-        .join("");
-      document.getElementById("dCons").innerHTML = m.cons
-        .map((p) => `<li><span class="redact">${p}</span></li>`)
-        .join("");
-      document.getElementById("dApps").innerHTML = m.apps
-        .map((a) => `<span class="app-tag">${a}</span>`)
-        .join("");
-      document.getElementById("dData").innerHTML = `
-      <div class="data-row"><span>DENSITY</span><span>${m.density}</span></div>
-      <div class="data-row"><span>STRENGTH</span><span>${m.yield}</span></div>
-      <div class="data-row"><span>TENSILE</span><span>${m.tensile}</span></div>
-      <div class="data-row"><span>FIRE PERFORMANCE</span><span>${m.fire}</span></div>
-      <div class="data-row"><span>STANDARD</span><span>${m.standard}</span></div>
-    `;
-      go("detail");
-      specs.forEach(([, v, id]) => sweepDial(id, v));
-    },
-  );
+
+  document.getElementById("dTitle").textContent = m.name;
+  document.getElementById("dRole").textContent = `ROLE — ${m.role}`;
+  const sealYear = 1927 + ((m.id * 7) % 40);
+  const sealNote = [
+    "RE-SEALED",
+    "CONDITION VERIFIED",
+    "PENDING REVIEW",
+    "RECOVERED INTACT",
+    "PARTIALLY LEGIBLE",
+    "ARCHIVIST APPROVED",
+  ][m.id % 6];
+  document.getElementById("dSeal").innerHTML =
+    `${sealNote}<br>EST. ${sealYear}`;
+
+  const specs = [
+    ["STRENGTH", m.strength * 20, "rd1"],
+    ["DURABILITY", m.durability * 20, "rd2"],
+    ["WEIGHT", m.weight * 20, "rd3"],
+    ["FLEXIBILITY", m.flexibility * 20, "rd4"],
+  ];
+
+  document.getElementById("dDials").innerHTML = specs
+    .map(
+      ([l, v, id]) =>
+        `<div class="dial-block">${dialSVG(v, id)}<div class="dial-label">${l}</div><div class="dial-val">${v / 20}/5</div></div>`,
+    )
+    .join("");
+
+  document.getElementById("dPros").innerHTML = m.pros
+    .map((p) => `<li>${p}</li>`)
+    .join("");
+
+  document.getElementById("dCons").innerHTML = m.cons
+    .map((p) => `<li><span class="redact">${p}</span></li>`)
+    .join("");
+
+  document.getElementById("dApps").innerHTML = m.apps
+    .map((a) => `<span class="app-tag">${a}</span>`)
+    .join("");
+
+  document.getElementById("dData").innerHTML = `
+    <div class="data-row"><span>DENSITY</span><span>${m.density}</span></div>
+    <div class="data-row"><span>STRENGTH</span><span>${m.yield}</span></div>
+    <div class="data-row"><span>TENSILE</span><span>${m.tensile}</span></div>
+    <div class="data-row"><span>FIRE PERFORMANCE</span><span>${m.fire}</span></div>
+    <div class="data-row"><span>STANDARD</span><span>${m.standard}</span></div>
+  `;
+
+  go("detail");
+  specs.forEach(([, v, id]) => sweepDial(id, v));
 }
 
-// ---- nav ----
-function go(viewName){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('view-'+ viewName).classList.add('active');
-  document.querySelectorAll('.depth-mark').forEach(b => b.classList.remove('on'));
+// nav
+function go(viewName) {
+  document
+    .querySelectorAll(".view")
+    .forEach((v) => v.classList.remove("active"));
+  const view = document.getElementById("view-" + viewName);
+  if (view) view.classList.add("active");
+
+  document
+    .querySelectorAll(".depth-mark")
+    .forEach((b) => b.classList.remove("on"));
   const navBtn = document.querySelector(`.depth-mark[data-view="${viewName}"]`);
-  if(navBtn){
-    navBtn.classList.add('on');
-    const depthPct = navBtn.style.top;
-    document.getElementById('depthFill').style.height = depthPct;
+  if (navBtn) {
+    navBtn.classList.add("on");
+    const positions = {
+      home: "5%",
+      database: "27%",
+      projects: "50%",
+      compare: "73%",
+      tech: "95%",
+    };
+    const fill = document.getElementById("depthFill");
+    fill.style.width = "8%";
+    fill.style.left = positions[viewName] || "5%";
   }
-  window.scrollTo({top:0, behavior:'instant'});
-  if(viewName === 'compare'){ renderChips(); renderCompare(); }
+
+  window.scrollTo({ top: 0, behavior: "instant" });
+
+  if (viewName === "compare") {
+    if (typeof renderChips === "function") renderChips();
+    if (typeof renderCompare === "function") renderCompare();
+  }
 }
-document.querySelectorAll('.depth-mark').forEach(b => {
-  b.addEventListener('click', ()=>{
-    const view = b.getAttribute('data-view');
-    if(view === 'database' || view === 'home'){ go(view); return; }
-    bootSequence([`ACCESSING REGISTRY: ${view.toUpperCase()}...`,`RECORD RECOVERED.`], () => go(view));
+
+document.querySelectorAll(".depth-mark").forEach((b) => {
+  b.addEventListener("click", () => {
+    const view = b.getAttribute("data-view");
+    go(view);
   });
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  bootSequence(
+    [
+      "INITIALIZING ARCHIVE-7...",
+      "DECRYPTING DEEP SEA RECORDS...",
+      "SYSTEM NOMINAL. WELCOME, ARCHIVIST.",
+    ],
+    () => go("home"),
+  );
 });
