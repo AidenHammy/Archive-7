@@ -15,29 +15,29 @@
     <defs>
       <symbol id="fan-divider" viewBox="0 0 140 28">
         <g stroke="#c89a4a" stroke-width="1" fill="none">
-          <path d="M70 28 L70 4" />
-          <path d="M70 28 L40 6" />
-          <path d="M70 28 L100 6" />
-          <path d="M70 28 L15 14" />
-          <path d="M70 28 L125 14" />
+          <path d="M70 28 L70 4"/>
+          <path d="M70 28 L40 6"/>
+          <path d="M70 28 L100 6"/>
+          <path d="M70 28 L15 14"/>
+          <path d="M70 28 L125 14"/>
         </g>
-        <circle cx="70" cy="4" r="2.5" fill="#c89a4a" />
+        <circle cx="70" cy="4" r="2.5" fill="#c89a4a"/>
       </symbol>
       <symbol id="deco-corner" viewBox="0 0 26 26">
-        <path d="M0 26 L0 8 Q0 0 8 0 L26 0" fill="none" stroke="#c89a4a" stroke-width="1.5" />
-        <path d="M0 16 L6 16 M16 0 L16 6" stroke="#c89a4a" stroke-width="1" />
+        <path d="M0 26 L0 8 Q0 0 8 0 L26 0" fill="none" stroke="#c89a4a" stroke-width="1.5"/>
+        <path d="M0 16 L6 16 M16 0 L16 6" stroke="#c89a4a" stroke-width="1"/>
       </symbol>
     </defs>
   </svg>
 
   <div class="architecture">
     <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-      <line x1="0" y1="90" x2="1200" y2="90" stroke="#1c1712" stroke-width="2" />
-      <line x1="150" y1="0" x2="150" y2="800" stroke="#161209" stroke-width="60" opacity="0.5" />
-      <line x1="980" y1="0" x2="980" y2="800" stroke="#161209" stroke-width="90" opacity="0.4" />
-      <circle cx="1080" cy="180" r="120" fill="none" stroke="#1a1510" stroke-width="14" opacity="0.4" />
-      <path d="M0 620 Q 300 560 620 610 T 1200 590" stroke="#141008" stroke-width="3" fill="none" opacity="0.5" />
-      <path d="M60 0 L60 250 Q60 280 100 280 L 260 280" stroke="#181209" stroke-width="4" fill="none" opacity="0.45" />
+      <line x1="0" y1="90" x2="1200" y2="90" stroke="#1c1712" stroke-width="2"/>
+      <line x1="150" y1="0" x2="150" y2="800" stroke="#161209" stroke-width="60" opacity="0.5"/>
+      <line x1="980" y1="0" x2="980" y2="800" stroke="#161209" stroke-width="90" opacity="0.4"/>
+      <circle cx="1080" cy="180" r="120" fill="none" stroke="#1a1510" stroke-width="14" opacity="0.4"/>
+      <path d="M0 620 Q 300 560 620 610 T 1200 590" stroke="#141008" stroke-width="3" fill="none" opacity="0.5"/>
+      <path d="M60 0 L60 250 Q60 280 100 280 L 260 280" stroke="#181209" stroke-width="4" fill="none" opacity="0.45"/>
     </svg>
   </div>
   <div class="caustics"></div>
@@ -46,9 +46,7 @@
   <div class="depth-gauge">
     <div class="depth-brand">ARCHIVE-<span>7</span></div>
     <div class="depth-body">
-      <div class="depth-tube">
-        <div class="depth-fill" id="depthFill"></div>
-      </div>
+      <div class="depth-tube"><div class="depth-fill" id="depthFill"></div></div>
       <div class="depth-marks" id="depthMarks">
         <div class="depth-mark on" data-view="home" style="top:4%">
           <div class="depth-knob"></div>
@@ -60,8 +58,7 @@
         </div>
         <div class="depth-mark" data-view="projects" style="top:50%">
           <div class="depth-knob"></div>
-          <div class="depth-label"><span class="dname">Instrumentality</span><span class="ddepth">48 FATHOMS</span>
-          </div>
+          <div class="depth-label"><span class="dname">Instrumentality</span><span class="ddepth">48 FATHOMS</span></div>
         </div>
         <div class="depth-mark" data-view="compare" style="top:73%">
           <div class="depth-knob"></div>
@@ -81,7 +78,6 @@
     <span class="rline"></span>
   </div>
 
-  <!-- HOME -->
   <div class="view active" id="view-home">
     <div class="cover">
       <div class="cover-top">
@@ -92,8 +88,7 @@
       <div class="cover-title">
         <div class="kicker">The Seventeenth Record</div>
         <h1 class="display">BUILD YOUR<br><span>FOUNDATION</span></h1>
-        <div class="volume-rule"><span class="line"></span><span class="mono">VOLUME I</span><span class="line"></span>
-        </div>
+        <div class="volume-rule"><span class="line"></span><span class="mono">VOLUME I</span><span class="line"></span></div>
       </div>
 
       <div class="cover-content">
@@ -108,19 +103,15 @@
     </div>
   </div>
 
-  <!-- DATABASE -->
   <div class="view" id="view-database">
     <div class="section-head">
       <div class="eyebrow">§ 01 - SPECIMEN CLASSIFICATION</div>
       <h2 class="display">ARCHIVE REGISTRY</h2>
-      <svg class="fan-divider" width="140" height="28">
-        <use href="#fan-divider" />
-      </svg>
+      <svg class="fan-divider" width="140" height="28"><use href="#fan-divider"/></svg>
     </div>
     <div class="db-grid" id="dbGrid"></div>
   </div>
 
-  <!-- DETAIL -->
   <div class="view" id="view-detail">
     <div class="detail-top">
       <button class="back-btn" onclick="go('database')">← RETURN TO REGISTRY</button>
@@ -132,14 +123,8 @@
       <div>
         <div class="dials-row" id="dDials"></div>
         <div class="pros-cons">
-          <div class="pc-box pro">
-            <h5>STRENGTHS</h5>
-            <ul id="dPros"></ul>
-          </div>
-          <div class="pc-box con">
-            <h5>WEAKNESSES</h5>
-            <ul id="dCons"></ul>
-          </div>
+          <div class="pc-box pro"><h5>STRENGTHS</h5><ul id="dPros"></ul></div>
+          <div class="pc-box con"><h5>WEAKNESSES</h5><ul id="dCons"></ul></div>
         </div>
         <div class="applications">
           <h4>BEST USED FOR</h4>
@@ -147,26 +132,19 @@
         </div>
       </div>
       <div class="data-panel">
-        <svg class="deco-corner tl">
-          <use href="#deco-corner" />
-        </svg>
-        <svg class="deco-corner br">
-          <use href="#deco-corner" />
-        </svg>
+        <svg class="deco-corner tl"><use href="#deco-corner"/></svg>
+        <svg class="deco-corner br"><use href="#deco-corner"/></svg>
         <h4>TECHNICAL DATA</h4>
         <div id="dData"></div>
       </div>
     </div>
   </div>
 
-  <!-- PROJECTS -->
   <div class="view" id="view-projects">
     <div class="section-head">
       <div class="eyebrow">§ 02 - RECOMMENDED APPLICATION</div>
       <h2 class="display">SELECT STRUCTURAL APPLICATION</h2>
-      <svg class="fan-divider" width="140" height="28">
-        <use href="#fan-divider" />
-      </svg>
+      <svg class="fan-divider" width="140" height="28"><use href="#fan-divider"/></svg>
     </div>
     <div class="proj-grid" id="projGrid"></div>
     <div class="proj-result" id="projResult">
@@ -175,33 +153,26 @@
     </div>
   </div>
 
-  <!-- COMPARE -->
   <div class="view" id="view-compare">
     <div class="section-head">
       <div class="eyebrow">§ 03 - COMPARATIVE ANALYSIS</div>
       <h2 class="display">COMPARATIVE ANALYSIS</h2>
-      <svg class="fan-divider" width="140" height="28">
-        <use href="#fan-divider" />
-      </svg>
+      <svg class="fan-divider" width="140" height="28"><use href="#fan-divider"/></svg>
     </div>
     <div class="compare-select" id="cmpSelect"></div>
     <div class="compare-panel" id="cmpPanel"></div>
   </div>
 
-  <!-- TECHNICAL -->
   <div class="view tech-view" id="view-tech">
     <div class="section-head">
       <div class="eyebrow">§ 04 - TECHNICAL REGISTER</div>
       <h2 class="display">TECHNICAL REGISTER</h2>
-      <svg class="fan-divider" width="140" height="28">
-        <use href="#fan-divider" />
-      </svg>
+      <svg class="fan-divider" width="140" height="28"><use href="#fan-divider"/></svg>
     </div>
     <div class="tech-grid" id="techGrid"></div>
   </div>
 
-  <footer>ARCHIVE-7 - DEEP ARCHIVE PROTOCOL - SPECIFICATIONS REFERENCE STANDARD ENGINEERING SOURCES - FOR DESIGN
-    GUIDANCE, CONSULT A LICENSED ENGINEER</footer>
+  <footer>ARCHIVE-7 - DEEP ARCHIVE PROTOCOL - SPECIFICATIONS REFERENCE STANDARD ENGINEERING SOURCES - FOR DESIGN GUIDANCE, CONSULT A LICENSED ENGINEER</footer>
 
   <script src="script.js"></script>
   <script src="extend.js"></script>

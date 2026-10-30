@@ -166,14 +166,10 @@ const MATERIALS = [
   },
 ];
 
-// boot
 function bootSequence(lines, onDone) {
   const overlay = document.getElementById("bootOverlay");
   overlay.innerHTML = lines
-    .map(
-      (l, i) =>
-        `<div class="line" id="bl${i}">${l}<span class="cursor"></span></div>`,
-    )
+    .map((l, i) => `<div class="line" id="bl${i}">${l}<span class="cursor"></span></div>`)
     .join("");
   overlay.classList.add("active");
   lines.forEach((l, i) => {
@@ -189,16 +185,12 @@ function bootSequence(lines, onDone) {
       }
     }, i * 200);
   });
-  setTimeout(
-    () => {
-      overlay.classList.remove("active");
-      onDone();
-    },
-    lines.length * 200 + 240,
-  );
+  setTimeout(() => {
+    overlay.classList.remove("active");
+    onDone();
+  }, lines.length * 200 + 240);
 }
 
-// dial svg
 function dialSVG(pct, dialId) {
   const angleFor = (p) => -120 + (p / 100) * 240;
   const ticks = Array.from({ length: 13 }, (_, i) => {
@@ -240,6 +232,7 @@ function dialSVG(pct, dialId) {
     <text x="50" y="66" text-anchor="middle" font-size="5" fill="#5a4a34" font-family="monospace">${serial}</text>
   </svg>`;
 }
+
 function sweepDial(dialId, pct) {
   requestAnimationFrame(() => {
     const needle = document.getElementById(`${dialId}-needle`);
@@ -248,12 +241,8 @@ function sweepDial(dialId, pct) {
   });
 }
 
-// database grid
 const meter = (val) =>
-  Array.from(
-    { length: 5 },
-    (_, i) => `<i class="${i < val ? "fill" : ""}"></i>`,
-  ).join("");
+  Array.from({ length: 5 }, (_, i) => `<i class="${i < val ? "fill" : ""}"></i>`).join("");
 
 const dbGrid = document.getElementById("dbGrid");
 MATERIALS.forEach((m, i) => {
@@ -287,8 +276,7 @@ function openDetail(id) {
     "PARTIALLY LEGIBLE",
     "ARCHIVIST APPROVED",
   ][m.id % 6];
-  document.getElementById("dSeal").innerHTML =
-    `${sealNote}<br>EST. ${sealYear}`;
+  document.getElementById("dSeal").innerHTML = `${sealNote}<br>EST. ${sealYear}`;
 
   const specs = [
     ["STRENGTH", m.strength * 20, "rd1"],
@@ -298,23 +286,12 @@ function openDetail(id) {
   ];
 
   document.getElementById("dDials").innerHTML = specs
-    .map(
-      ([l, v, id]) =>
-        `<div class="dial-block">${dialSVG(v, id)}<div class="dial-label">${l}</div><div class="dial-val">${v / 20}/5</div></div>`,
-    )
+    .map(([l, v, id]) => `<div class="dial-block">${dialSVG(v, id)}<div class="dial-label">${l}</div><div class="dial-val">${v / 20}/5</div></div>`)
     .join("");
 
-  document.getElementById("dPros").innerHTML = m.pros
-    .map((p) => `<li>${p}</li>`)
-    .join("");
-
-  document.getElementById("dCons").innerHTML = m.cons
-    .map((p) => `<li><span class="redact">${p}</span></li>`)
-    .join("");
-
-  document.getElementById("dApps").innerHTML = m.apps
-    .map((a) => `<span class="app-tag">${a}</span>`)
-    .join("");
+  document.getElementById("dPros").innerHTML = m.pros.map((p) => `<li>${p}</li>`).join("");
+  document.getElementById("dCons").innerHTML = m.cons.map((p) => `<li><span class="redact">${p}</span></li>`).join("");
+  document.getElementById("dApps").innerHTML = m.apps.map((a) => `<span class="app-tag">${a}</span>`).join("");
 
   document.getElementById("dData").innerHTML = `
     <div class="data-row"><span>DENSITY</span><span>${m.density}</span></div>
@@ -328,17 +305,12 @@ function openDetail(id) {
   specs.forEach(([, v, id]) => sweepDial(id, v));
 }
 
-// nav
 function go(viewName) {
-  document
-    .querySelectorAll(".view")
-    .forEach((v) => v.classList.remove("active"));
+  document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
   const view = document.getElementById("view-" + viewName);
   if (view) view.classList.add("active");
 
-  document
-    .querySelectorAll(".depth-mark")
-    .forEach((b) => b.classList.remove("on"));
+  document.querySelectorAll(".depth-mark").forEach((b) => b.classList.remove("on"));
   const navBtn = document.querySelector(`.depth-mark[data-view="${viewName}"]`);
   if (navBtn) {
     navBtn.classList.add("on");
@@ -363,19 +335,12 @@ function go(viewName) {
 }
 
 document.querySelectorAll(".depth-mark").forEach((b) => {
-  b.addEventListener("click", () => {
-    const view = b.getAttribute("data-view");
-    go(view);
-  });
+  b.addEventListener("click", () => go(b.dataset.view));
 });
 
 window.addEventListener("DOMContentLoaded", () => {
   bootSequence(
-    [
-      "INITIALIZING ARCHIVE-7...",
-      "DECRYPTING DEEP SEA RECORDS...",
-      "SYSTEM NOMINAL. WELCOME, ARCHIVIST.",
-    ],
+    ["INITIALIZING ARCHIVE-7...", "DECRYPTING DEEP SEA RECORDS...", "SYSTEM NOMINAL. WELCOME, ARCHIVIST."],
     () => go("home"),
   );
 });

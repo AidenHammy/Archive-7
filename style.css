@@ -187,7 +187,7 @@ body::after {
   height: 100%;
   width: 8%;
   background: linear-gradient(90deg, rgba(168, 70, 31, 0.5), rgba(200, 154, 74, 0.8));
-  transition: width 0.9s cubic-bezier(.25, .9, .3, 1), left 0.9s cubic-bezier(.25, .9, .3, 1);
+  transition: 0.9s cubic-bezier(.25, .9, .3, 1);
 }
 
 .depth-marks {
@@ -233,7 +233,7 @@ body::after {
   margin: 0 auto;
   background: radial-gradient(circle at 35% 30%, #4a3c2a, #1c1712 70%);
   border: 1px solid #4a3a2a;
-  transition: background .3s, border-color .3s, box-shadow .3s;
+  transition: .3s;
 }
 
 .depth-label {
@@ -301,7 +301,6 @@ body::after {
   }
 }
 
-/* views */
 .view {
   display: none;
   min-height: 100vh;
@@ -364,8 +363,6 @@ body::after {
   }
 }
 
-
-/* cover */
 .cover {
   min-height: calc(100vh - 90px);
   display: flex;
@@ -465,7 +462,7 @@ body::after {
 }
 
 .fs-stat:first-child {
-  border-left: none;
+  border-left: 0;
 }
 
 .fs-stat .fsval {
@@ -540,12 +537,12 @@ body::after {
   }
 
   .fs-stat {
-    border-left: none;
+    border-left: 0;
     border-top: 1px solid var(--line);
   }
 
   .fs-stat:first-child {
-    border-top: none;
+    border-top: 0;
   }
 
   .featured {
@@ -577,8 +574,6 @@ body::after {
   text-align: right;
 }
 
-
-/* section heads */
 .section-head {
   padding: 20px 0 36px;
 }
@@ -620,8 +615,6 @@ body::after {
   transform: rotate(180deg);
 }
 
-
-/* database grid */
 .db-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -638,7 +631,7 @@ body::after {
   padding: 24px;
   cursor: pointer;
   position: relative;
-  transition: all 0.3s ease;
+  transition: .3s ease;
   min-height: 280px;
   display: flex;
   flex-direction: column;
@@ -752,8 +745,6 @@ body::after {
   color: var(--brass);
 }
 
-
-/* detail */
 .detail-top {
   position: relative;
   padding: 20px 0 36px;
@@ -953,7 +944,7 @@ body::after {
   color: transparent;
   border-radius: 2px;
   padding: 0 3px;
-  transition: background .3s, color .2s, border-color .3s;
+  transition: .3s;
 }
 
 .pc-box.con li:hover .redact {

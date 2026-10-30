@@ -78,6 +78,7 @@ const EXTRA = {
     co2: 8.2,
   },
 };
+
 MATERIALS.forEach((m) => {
   const x = EXTRA[m.name];
   m.s = {
@@ -92,6 +93,7 @@ MATERIALS.forEach((m) => {
     light: x.light,
   };
 });
+
 const CRITERIA = {
   strength: "raw strength",
   durability: "durability",
@@ -103,11 +105,11 @@ const CRITERIA = {
   thermal: "insulation",
   light: "daylight transmission",
 };
+
 const $ = (id) => document.getElementById(id);
 const mById = (id) => MATERIALS.find((m) => m.id === id);
 const COLORS = ["#e3b866", "#4fb3a9", "#e0592a"];
 
-// nav fixes
 document.querySelectorAll(".depth-mark").forEach((e) => (e.style.top = ""));
 const _go = go;
 go = function (v) {
@@ -120,16 +122,19 @@ go = function (v) {
   if (v === "home") countUp();
 };
 
-// ambient bubbles
 for (let i = 0; i < 16; i++) {
   const b = document.createElement("div");
   const s = 4 + Math.random() * 16;
   b.className = "bubble";
-  b.style.cssText = `left:${Math.random() * 100}%;width:${s}px;height:${s}px;animation-duration:${14 + Math.random() * 22}s;animation-delay:${-Math.random() * 30}s;--drift:${(Math.random() - 0.5) * 80}px`;
+  b.style.cssText = `left: ${Math.random() * 100}%;
+                     width: ${s}px;
+                     height: ${s}px;
+                     animation-duration: ${14 + Math.random() * 22}s;
+                     animation-delay: ${-Math.random() * 30}s;
+                     --drift: ${(Math.random() - 0.5) * 80}px`;
   document.body.appendChild(b);
 }
 
-// home
 const PROJECTS = [
   {
     id: "highrise",
@@ -223,16 +228,14 @@ function countUp() {
     }, 600 / t);
   });
 }
+
 function renderHome() {
   $("facilitySummary").innerHTML = [
     [MATERIALS.length, "Specimens catalogued"],
     [PROJECTS.length, "Application profiles"],
     [Object.keys(CRITERIA).length - 1, "Graded parameters"],
   ]
-    .map(
-      ([n, l]) =>
-        `<div class="fs-stat"><div class="fsval" data-to="${n}">0</div><div class="fslabel">${l}</div></div>`,
-    )
+    .map(([n, l]) => `<div class="fs-stat"><div class="fsval" data-to="${n}">0</div><div class="fslabel">${l}</div></div>`)
     .join("");
   const m = MATERIALS[new Date().getDate() % MATERIALS.length];
   $("featuredSpecimen").innerHTML = `
@@ -271,6 +274,7 @@ function reasonFor(m, p) {
   if (weak && weak.v <= 2) s += ` Held back by ${CRITERIA[weak.k]}.`;
   return s;
 }
+
 function renderProjects() {
   $("projGrid").innerHTML = PROJECTS.map(
     (p) => `
@@ -278,18 +282,17 @@ function renderProjects() {
       <span class="pcode">${p.code}</span><h3>${p.name}</h3><p>${p.blurb}</p>
       <span class="penter">RUN ASSESSMENT →</span></button>`,
   ).join("");
-  document
-    .querySelectorAll(".proj-card")
-    .forEach((c) => (c.onclick = () => showProject(c.dataset.id)));
+  document.querySelectorAll(".proj-card").forEach((c) => {
+    c.onclick = () => showProject(c.dataset.id);
+  });
 }
+
 function showProject(id) {
   const p = PROJECTS.find((x) => x.id === id);
-  document
-    .querySelectorAll(".proj-card")
-    .forEach((c) => c.classList.toggle("sel", c.dataset.id === id));
-  const ranked = MATERIALS.map((m) => ({ m, s: scoreFor(m, p) })).sort(
-    (a, b) => b.s - a.s,
-  );
+  document.querySelectorAll(".proj-card").forEach((c) => {
+    c.classList.toggle("sel", c.dataset.id === id);
+  });
+  const ranked = MATERIALS.map((m) => ({ m, s: scoreFor(m, p) })).sort((a, b) => b.s - a.s);
   const top = ranked[0].s;
   $("projResultTitle").textContent = `${p.name} - RANKED SPECIMENS`;
   $("projResultList").innerHTML =
@@ -327,6 +330,7 @@ const AXES = [
   "eco",
   "thermal",
 ];
+
 const AX_LABEL = {
   strength: "STRENGTH",
   durability: "DURABILITY",
@@ -337,6 +341,7 @@ const AX_LABEL = {
   eco: "ECO",
   thermal: "INSULATION",
 };
+
 function renderChips() {
   $("cmpSelect").innerHTML =
     `<div class="cmp-hint">SELECT 2–3 SPECIMENS</div>` +
@@ -344,22 +349,22 @@ function renderChips() {
       const i = cmpSel.indexOf(m.id);
       return `<button class="chip ${i > -1 ? "on" : ""}" data-id="${m.id}">${i > -1 ? `<i style="background:${COLORS[i]}"></i>` : ""}${m.name}</button>`;
     }).join("");
-  document.querySelectorAll("#cmpSelect .chip").forEach(
-    (c) =>
-      (c.onclick = () => {
-        const id = +c.dataset.id,
-          i = cmpSel.indexOf(id);
-        if (i > -1) {
-          if (cmpSel.length > 2) cmpSel.splice(i, 1);
-        } else {
-          if (cmpSel.length >= 3) cmpSel.shift();
-          cmpSel.push(id);
-        }
-        renderChips();
-        renderCompare();
-      }),
-  );
+  document.querySelectorAll("#cmpSelect .chip").forEach((c) => {
+    c.onclick = () => {
+      const id = +c.dataset.id,
+        i = cmpSel.indexOf(id);
+      if (i > -1) {
+        if (cmpSel.length > 2) cmpSel.splice(i, 1);
+      } else {
+        if (cmpSel.length >= 3) cmpSel.shift();
+        cmpSel.push(id);
+      }
+      renderChips();
+      renderCompare();
+    };
+  });
 }
+
 function radar(ms) {
   const C = 200,
     R = 135,
@@ -368,11 +373,9 @@ function radar(ms) {
     const a = (Math.PI * 2 * i) / n - Math.PI / 2;
     return [C + (Math.cos(a) * R * v) / 5, C + (Math.sin(a) * R * v) / 5];
   };
+  
   let g = [1, 2, 3, 4, 5]
-    .map(
-      (r) =>
-        `<polygon points="${AXES.map((_, i) => pt(i, r).join(",")).join(" ")}" fill="none" stroke="#2a3634" stroke-width="${r === 5 ? 1.4 : 0.7}"/>`,
-    )
+    .map((r) => `<polygon points="${AXES.map((_, i) => pt(i, r).join(",")).join(" ")}" fill="none" stroke="#2a3634" stroke-width="${r === 5 ? 1.4 : 0.7}"/>`)
     .join("");
   g += AXES.map((a, i) => {
     const [x, y] = pt(i, 5),
@@ -380,17 +383,17 @@ function radar(ms) {
     return `<line x1="${C}" y1="${C}" x2="${x}" y2="${y}" stroke="#2a3634" stroke-width=".7"/><text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="9.5" fill="#8a7860" font-family="JetBrains Mono" letter-spacing="1">${AX_LABEL[a]}</text>`;
   }).join("");
   g += ms
-    .map(
-      (m, k) =>
-        `<polygon class="rpoly" style="animation-delay:${k * 120}ms" points="${AXES.map((a, i) => pt(i, m.s[a]).join(",")).join(" ")}" fill="${COLORS[k]}" fill-opacity=".16" stroke="${COLORS[k]}" stroke-width="2" stroke-linejoin="round"/>` +
-        AXES.map((a, i) => {
-          const [x, y] = pt(i, m.s[a]);
-          return `<circle cx="${x}" cy="${y}" r="3" fill="${COLORS[k]}"/>`;
-        }).join(""),
+    .map((m, k) =>
+      `<polygon class="rpoly" style="animation-delay:${k * 120}ms" points="${AXES.map((a, i) => pt(i, m.s[a]).join(",")).join(" ")}" fill="${COLORS[k]}" fill-opacity=".16" stroke="${COLORS[k]}" stroke-width="2" stroke-linejoin="round"/>` +
+      AXES.map((a, i) => {
+        const [x, y] = pt(i, m.s[a]);
+        return `<circle cx="${x}" cy="${y}" r="3" fill="${COLORS[k]}"/>`;
+      }).join(""),
     )
     .join("");
   return `<svg viewBox="0 0 400 400" class="radar">${g}</svg>`;
 }
+
 function renderCompare() {
   const ms = cmpSel.map(mById);
   const wins = ms.map(() => 0);
@@ -431,13 +434,9 @@ const TCOLS = [
 ];
 let tSort = { key: "ss", dir: -1 };
 function renderTech() {
-  const rows = [...MATERIALS].sort(
-    (a, b) => (EXTRA[a.name][tSort.key] - EXTRA[b.name][tSort.key]) * tSort.dir,
-  );
+  const rows = [...MATERIALS].sort((a, b) => (EXTRA[a.name][tSort.key] - EXTRA[b.name][tSort.key]) * tSort.dir);
   const maxes = {};
-  TCOLS.forEach(
-    ([k]) => (maxes[k] = Math.max(...MATERIALS.map((m) => EXTRA[m.name][k]))),
-  );
+  TCOLS.forEach(([k]) => (maxes[k] = Math.max(...MATERIALS.map((m) => EXTRA[m.name][k]))));
   $("techGrid").innerHTML = `
     <div class="tech-wrap"><table class="tech-table"><thead><tr><th>SPECIMEN</th>${TCOLS.map(
       ([k, l, u]) =>
@@ -460,14 +459,13 @@ function renderTech() {
       <div><h5>EMBODIED CARBON</h5><p>Per kilogram, concrete looks gentle and aluminium brutal. Per structure, concrete's sheer volume changes the story. Compare by element, not by kilo.</p></div>
       <div><h5>CAUTION</h5><p>Values are typical, indicative figures for orientation. Real design needs the grade, code and a licensed engineer.</p></div>
     </div>`;
-  document.querySelectorAll(".tech-table th[data-k]").forEach(
-    (th) =>
-      (th.onclick = () => {
-        const k = th.dataset.k;
-        tSort = { key: k, dir: tSort.key === k ? -tSort.dir : -1 };
-        renderTech();
-      }),
-  );
+  document.querySelectorAll(".tech-table th[data-k]").forEach((th) => {
+    th.onclick = () => {
+      const k = th.dataset.k;
+      tSort = { key: k, dir: tSort.key === k ? -tSort.dir : -1 };
+      renderTech();
+    };
+  });
 }
 
 renderHome();
@@ -476,7 +474,6 @@ renderChips();
 renderCompare();
 renderTech();
 
-// brighter gauge dials + tap-to-declassify
 const _dial = dialSVG;
 const DIAL_REMAP = {
   "#4a3a26": "#b79b62",
@@ -493,8 +490,7 @@ const DIAL_REMAP = {
 };
 dialSVG = (p, id) => {
   let s = _dial(p, id);
-  for (const [from, to] of Object.entries(DIAL_REMAP))
-    s = s.replaceAll(from, to);
+  for (const [from, to] of Object.entries(DIAL_REMAP)) s = s.replaceAll(from, to);
   return s;
 };
 document.addEventListener("click", (e) => {
