@@ -40,6 +40,4 @@ if youre offline the @import just fails and it falls back to system fonts, it'd 
 
 works on modern chrome/firefox/safari. uses css variables, backdrop-filter (the nav blur), grid, clip-path. nothing too exotic.. ie doesnt work obviously. older safari might look a bit off on the blur and the clipped shapes.
 
-
-
 that's about it. it's a small project, mostly for fun. if you actually use this for real engineering work please talk to a licensed engineer first. the numbers here are typical/indicative values not design values!

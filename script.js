@@ -14,7 +14,7 @@ const MATERIALS = [
     standard: "EN 10025 / ASTM A36",
     pros: [
       "Highest strength-to-cost ratio",
-      "Ductile — bends before it breaks",
+      "Ductile - bends before it breaks",
       "Fully recyclable",
     ],
     cons: [
@@ -35,7 +35,7 @@ const MATERIALS = [
     density: "2,400 kg/m³",
     yield: "25-40 MPa compressive",
     tensile: "~3 MPa (needs rebar)",
-    fire: "Excellent — inherently fire resistant",
+    fire: "Excellent - inherently fire resistant",
     standard: "ACI 318 / EN 1992",
     pros: [
       "Extremely strong in compression",
@@ -90,7 +90,7 @@ const MATERIALS = [
     density: "1,700-2,100 kg/m³",
     yield: "10-35 MPa compressive",
     tensile: "Negligible",
-    fire: "Excellent — non-combustible",
+    fire: "Excellent - non-combustible",
     standard: "ASTM C62 / EN 771",
     pros: [
       "Extremely durable, centuries-long lifespan",
@@ -128,7 +128,7 @@ const MATERIALS = [
       "Wide range of performance coatings",
     ],
     cons: [
-      "Brittle — fails suddenly without warning",
+      "Brittle - fails suddenly without warning",
       "Poor insulator unless multi-pane",
       "Expensive at large structural spans",
     ],
@@ -277,7 +277,7 @@ function openDetail(id) {
   const m = MATERIALS.find((x) => x.id === id);
 
   document.getElementById("dTitle").textContent = m.name;
-  document.getElementById("dRole").textContent = `ROLE — ${m.role}`;
+  document.getElementById("dRole").textContent = `ROLE - ${m.role}`;
   const sealYear = 1927 + ((m.id * 7) % 40);
   const sealNote = [
     "RE-SEALED",

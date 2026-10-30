@@ -150,7 +150,7 @@ const PROJECTS = [
     id: "bridge",
     code: "P-02",
     name: "Long-Span Bridge",
-    blurb: "Tension, fatigue, weather — for a century.",
+    blurb: "Tension, fatigue, weather - for a century.",
     w: { strength: 5, durability: 4, flexibility: 4, lightness: 3, economy: 2 },
     note: "Steel's ductility gives warning before failure, which matters when the load is a moving one. Concrete decks ride on top.",
   },
@@ -291,7 +291,7 @@ function showProject(id) {
     (a, b) => b.s - a.s,
   );
   const top = ranked[0].s;
-  $("projResultTitle").textContent = `${p.name} — RANKED SPECIMENS`;
+  $("projResultTitle").textContent = `${p.name} - RANKED SPECIMENS`;
   $("projResultList").innerHTML =
     ranked
       .map(({ m, s }, i) => {
@@ -408,7 +408,7 @@ function renderCompare() {
   const lead = wins.indexOf(Math.max(...wins));
   const verdict =
     Math.max(...wins) === 0
-      ? "A dead heat — no specimen leads outright on any parameter."
+      ? "A dead heat - no specimen leads outright on any parameter."
       : `<b style="color:${COLORS[lead]}">${ms[lead].name}</b> leads outright on ${wins[lead]} of ${AXES.length} parameters.`;
   const spec = (label, f) =>
     `<div class="cmp-spec"><span>${label}</span>${ms.map((m, k) => `<span style="color:${COLORS[k]}">${f(m)}</span>`).join("")}</div>`;
@@ -456,7 +456,7 @@ function renderTech() {
       .join("")}</tbody></table></div>
     <div class="tech-notes">
       <div><h5>READING THE REGISTER</h5><p>Click a column to rank the specimens. Bars show each value against the highest in that column. Click a row to open its full record.</p></div>
-      <div><h5>SPECIFIC STRENGTH</h5><p>Yield (or compressive) strength divided by density — how much load a kilogram can carry. It's why timber and aluminium punch above their weight.</p></div>
+      <div><h5>SPECIFIC STRENGTH</h5><p>Yield (or compressive) strength divided by density - how much load a kilogram can carry. It's why timber and aluminium punch above their weight.</p></div>
       <div><h5>EMBODIED CARBON</h5><p>Per kilogram, concrete looks gentle and aluminium brutal. Per structure, concrete's sheer volume changes the story. Compare by element, not by kilo.</p></div>
       <div><h5>CAUTION</h5><p>Values are typical, indicative figures for orientation. Real design needs the grade, code and a licensed engineer.</p></div>
     </div>`;
