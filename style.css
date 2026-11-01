@@ -8,20 +8,20 @@
   --rust: #a8461f;
   --white: #ece3cf;
   --cream: #cbbf9e;
-  --line: #2a3634;
+  --line: #2a3634
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0
 }
 
 body {
   background: radial-gradient(ellipse at 50% -10%, #10201f 0%, var(--black) 60%);
   color: var(--white);
   font-family: 'Oswald', sans-serif;
-  overflow-x: hidden;
+  overflow-x: hidden
 }
 
 .display {
@@ -29,12 +29,12 @@ body {
   text-transform: uppercase;
   line-height: 0.92;
   font-weight: 900;
-  letter-spacing: 1px;
+  letter-spacing: 1px
 }
 
 ::selection {
   background: var(--brass);
-  color: var(--black);
+  color: var(--black)
 }
 
 body::before {
@@ -46,7 +46,7 @@ body::before {
   background:
     radial-gradient(circle at 20% 30%, rgba(28, 74, 74, 0.05), transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(168, 70, 31, 0.04), transparent 45%);
-  mix-blend-mode: overlay;
+  mix-blend-mode: overlay
 }
 
 body::after {
@@ -57,7 +57,7 @@ body::after {
   z-index: 998;
   background:
     radial-gradient(ellipse 70% 40% at 50% 0%, transparent 55%, rgba(0, 0, 0, 0.4) 100%),
-    radial-gradient(ellipse 90% 45% at 50% 100%, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+    radial-gradient(ellipse 90% 45% at 50% 100%, transparent 60%, rgba(0, 0, 0, 0.4) 100%)
 }
 
 .architecture {
@@ -65,12 +65,12 @@ body::after {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.3
 }
 
 .architecture svg {
   width: 100%;
-  height: 100%;
+  height: 100%
 }
 
 .caustics {
@@ -83,16 +83,16 @@ body::after {
   background:
     repeating-linear-gradient(72deg, rgba(28, 74, 74, 0.10) 0px, transparent 60px, transparent 140px, rgba(28, 74, 74, 0.08) 200px),
     repeating-linear-gradient(108deg, rgba(200, 154, 74, 0.05) 0px, transparent 80px, transparent 160px, rgba(200, 154, 74, 0.04) 220px);
-  animation: causticDrift 40s ease-in-out infinite alternate;
+  animation: causticDrift 40s ease-in-out infinite alternate
 }
 
 @keyframes causticDrift {
   0% {
-    transform: translate(0, 0) scale(1);
+    transform: translate(0, 0) scale(1)
   }
 
   100% {
-    transform: translate(-3%, 2%) scale(1.05);
+    transform: translate(-3%, 2%) scale(1.05)
   }
 }
 
@@ -104,30 +104,29 @@ body::after {
   z-index: 2;
   background: radial-gradient(circle at 35% 30%, rgba(203, 191, 158, 0.35), rgba(203, 191, 158, 0.05) 70%);
   border: 1px solid rgba(200, 154, 74, 0.15);
-  animation: rise linear infinite;
+  animation: rise linear infinite
 }
 
 @keyframes rise {
   0% {
     transform: translateY(0) translateX(0);
-    opacity: 0;
+    opacity: 0
   }
 
   8% {
-    opacity: 0.6;
+    opacity: 0.6
   }
 
   92% {
-    opacity: 0.4;
+    opacity: 0.4
   }
 
   100% {
     transform: translateY(-110vh) translateX(var(--drift, 20px));
-    opacity: 0;
+    opacity: 0
   }
 }
 
-/* pressure gauge nav */
 .depth-gauge {
   position: fixed;
   top: 0;
@@ -141,7 +140,7 @@ body::after {
   padding: 0 40px;
   background: linear-gradient(180deg, rgba(7, 12, 13, 0.95) 0%, rgba(7, 12, 13, 0.7) 100%);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line)
 }
 
 .depth-brand {
@@ -152,12 +151,12 @@ body::after {
   display: flex;
   align-items: center;
   gap: 12px;
-  pointer-events: auto;
+  pointer-events: auto
 }
 
 .depth-brand span {
   color: var(--rust);
-  font-size: 24px;
+  font-size: 24px
 }
 
 .depth-body {
@@ -167,7 +166,7 @@ body::after {
   margin: 0 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center
 }
 
 .depth-tube {
@@ -177,7 +176,7 @@ body::after {
   background: #0a0806;
   border: 1px solid #3a2d1e;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.7);
-  overflow: hidden;
+  overflow: hidden
 }
 
 .depth-fill {
@@ -187,14 +186,14 @@ body::after {
   height: 100%;
   width: 8%;
   background: linear-gradient(90deg, rgba(168, 70, 31, 0.5), rgba(200, 154, 74, 0.8));
-  transition: 0.9s cubic-bezier(.25, .9, .3, 1);
+  transition: 0.9s cubic-bezier(.25, .9, .3, 1)
 }
 
 .depth-marks {
   position: relative;
   width: 100%;
   height: 40px;
-  margin-top: -22px;
+  margin-top: -22px
 }
 
 .depth-mark {
@@ -203,27 +202,27 @@ body::after {
   transform: translateX(-50%);
   cursor: pointer;
   pointer-events: auto;
-  text-align: center;
+  text-align: center
 }
 
 .depth-mark[data-view="home"] {
-  left: 5%;
+  left: 5%
 }
 
 .depth-mark[data-view="database"] {
-  left: 27%;
+  left: 27%
 }
 
 .depth-mark[data-view="projects"] {
-  left: 50%;
+  left: 50%
 }
 
 .depth-mark[data-view="compare"] {
-  left: 73%;
+  left: 73%
 }
 
 .depth-mark[data-view="tech"] {
-  left: 95%;
+  left: 95%
 }
 
 .depth-knob {
@@ -233,13 +232,13 @@ body::after {
   margin: 0 auto;
   background: radial-gradient(circle at 35% 30%, #4a3c2a, #1c1712 70%);
   border: 1px solid #4a3a2a;
-  transition: .3s;
+  transition: .3s
 }
 
 .depth-label {
   display: flex;
   flex-direction: column;
-  margin-top: 8px;
+  margin-top: 8px
 }
 
 .depth-label .dname {
@@ -249,7 +248,7 @@ body::after {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #6b5836;
-  transition: color .25s;
+  transition: color .25s
 }
 
 .depth-label .ddepth {
@@ -257,47 +256,47 @@ body::after {
   font-size: 8px;
   color: #4a3c2a;
   letter-spacing: 1px;
-  margin-top: 2px;
+  margin-top: 2px
 }
 
 .depth-mark:hover .dname {
-  color: var(--cream);
+  color: var(--cream)
 }
 
 .depth-mark.on .dname {
-  color: var(--brass);
+  color: var(--brass)
 }
 
 .depth-mark.on .ddepth {
-  color: var(--rust);
+  color: var(--rust)
 }
 
 .depth-mark.on .depth-knob {
   background: radial-gradient(circle at 35% 30%, #e3b866, #a8461f 75%);
   border-color: var(--brass);
-  box-shadow: 0 0 10px 2px rgba(224, 90, 40, 0.6);
+  box-shadow: 0 0 10px 2px rgba(224, 90, 40, 0.6)
 }
 
 @media (max-width:768px) {
   .depth-gauge {
     height: 70px;
-    padding: 0 16px;
+    padding: 0 16px
   }
 
   .depth-brand {
-    font-size: 14px;
+    font-size: 14px
   }
 
   .depth-body {
-    margin: 0 16px;
+    margin: 0 16px
   }
 
   .depth-label .dname {
-    font-size: 9px;
+    font-size: 9px
   }
 
   .depth-label .ddepth {
-    display: none;
+    display: none
   }
 }
 
@@ -305,15 +304,15 @@ body::after {
   display: none;
   min-height: 100vh;
   padding: 120px 5% 60px;
-  position: relative;
+  position: relative
 }
 
 .right-mark {
-  display: none;
+  display: none
 }
 
 .view.active {
-  display: block;
+  display: block
 }
 
 .boot {
@@ -328,17 +327,17 @@ body::after {
   font-family: 'JetBrains Mono';
   font-size: 15px;
   color: var(--brass);
-  letter-spacing: 1px;
+  letter-spacing: 1px
 }
 
 .boot.active {
-  display: flex;
+  display: flex
 }
 
 .boot .line {
   opacity: 0;
   margin-bottom: 10px;
-  animation: typein .05s forwards;
+  animation: typein .05s forwards
 }
 
 .boot .cursor {
@@ -348,18 +347,18 @@ body::after {
   background: var(--brass);
   margin-left: 5px;
   animation: blink .8s steps(1) infinite;
-  vertical-align: middle;
+  vertical-align: middle
 }
 
 @keyframes blink {
   50% {
-    opacity: 0;
+    opacity: 0
   }
 }
 
 @keyframes typein {
   to {
-    opacity: 1;
+    opacity: 1
   }
 }
 
@@ -371,20 +370,20 @@ body::after {
   padding-top: 12vh;
   padding-bottom: 6vh;
   position: relative;
-  border-bottom: 2px solid var(--brass);
+  border-bottom: 2px solid var(--brass)
 }
 
 .cover-top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-start
 }
 
 .cover-eyebrow {
   font-family: "JetBrains Mono";
   color: var(--rust);
   font-size: 12px;
-  letter-spacing: 4px;
+  letter-spacing: 4px
 }
 
 .cover-accession {
@@ -393,12 +392,12 @@ body::after {
   color: #6b5836;
   letter-spacing: 1px;
   text-align: right;
-  line-height: 1.8;
+  line-height: 1.8
 }
 
 .cover-title {
   text-align: center;
-  margin: 6vh 0 5vh;
+  margin: 6vh 0 5vh
 }
 
 .cover-title .kicker {
@@ -406,17 +405,17 @@ body::after {
   font-size: 14px;
   color: var(--brass);
   letter-spacing: 5px;
-  margin-bottom: 18px;
+  margin-bottom: 18px
 }
 
 .cover-title h1 {
   font-size: clamp(46px, 8vw, 118px);
   color: var(--white);
-  line-height: 0.94;
+  line-height: 0.94
 }
 
 .cover-title h1 span {
-  color: var(--brass);
+  color: var(--brass)
 }
 
 .cover-title .volume-rule {
@@ -424,26 +423,26 @@ body::after {
   align-items: center;
   justify-content: center;
   gap: 18px;
-  margin-top: 26px;
+  margin-top: 26px
 }
 
 .cover-title .volume-rule .line {
   width: 80px;
   height: 1px;
-  background: var(--brass);
+  background: var(--brass)
 }
 
 .cover-title .volume-rule span.mono {
   font-family: 'JetBrains Mono';
   font-size: 11px;
   color: var(--cream);
-  letter-spacing: 3px;
+  letter-spacing: 3px
 }
 
 .cover-content {
   max-width: 900px;
   margin: 0 auto;
-  width: 100%;
+  width: 100%
 }
 
 .facility-summary {
@@ -452,24 +451,24 @@ body::after {
   gap: 0;
   border-top: 1px solid var(--brass);
   border-bottom: 1px solid var(--line);
-  margin-bottom: 44px;
+  margin-bottom: 44px
 }
 
 .fs-stat {
   padding: 18px 14px;
   text-align: center;
-  border-left: 1px solid var(--line);
+  border-left: 1px solid var(--line)
 }
 
 .fs-stat:first-child {
-  border-left: 0;
+  border-left: 0
 }
 
 .fs-stat .fsval {
   font-family: 'Cinzel';
   font-size: 30px;
   color: var(--brass);
-  line-height: 1;
+  line-height: 1
 }
 
 .fs-stat .fslabel {
@@ -478,7 +477,7 @@ body::after {
   letter-spacing: 2px;
   color: #8a7860;
   text-transform: uppercase;
-  margin-top: 8px;
+  margin-top: 8px
 }
 
 .featured {
@@ -489,11 +488,11 @@ body::after {
   border: 1px solid var(--line);
   padding: 22px 26px;
   cursor: pointer;
-  transition: border-color .2s;
+  transition: border-color .2s
 }
 
 .featured:hover {
-  border-color: var(--brass);
+  border-color: var(--brass)
 }
 
 .featured-tag {
@@ -501,13 +500,13 @@ body::after {
   font-size: 10px;
   letter-spacing: 2.5px;
   color: var(--rust);
-  margin-bottom: 8px;
+  margin-bottom: 8px
 }
 
 .featured h3 {
   font-family: 'Cinzel';
   font-size: 28px;
-  color: var(--white);
+  color: var(--white)
 }
 
 .featured p {
@@ -516,7 +515,7 @@ body::after {
   color: var(--cream);
   opacity: 0.75;
   margin-top: 6px;
-  max-width: 44ch;
+  max-width: 44ch
 }
 
 .featured-cta {
@@ -524,30 +523,30 @@ body::after {
   font-size: 11px;
   color: var(--brass);
   letter-spacing: 1.5px;
-  white-space: nowrap;
+  white-space: nowrap
 }
 
 @media (max-width:700px) {
   .cover-accession {
-    display: none;
+    display: none
   }
 
   .facility-summary {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 
   .fs-stat {
     border-left: 0;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--line)
   }
 
   .fs-stat:first-child {
-    border-top: 0;
+    border-top: 0
   }
 
   .featured {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start
   }
 }
 
@@ -555,7 +554,7 @@ body::after {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 6vh;
+  margin-top: 6vh
 }
 
 .cover-foot .sig {
@@ -563,7 +562,7 @@ body::after {
   font-size: 10.5px;
   color: #5a4a34;
   letter-spacing: 1.5px;
-  line-height: 1.8;
+  line-height: 1.8
 }
 
 .cover-foot .integrity {
@@ -571,11 +570,11 @@ body::after {
   font-size: 10.5px;
   color: var(--rust);
   letter-spacing: 1.5px;
-  text-align: right;
+  text-align: right
 }
 
 .section-head {
-  padding: 20px 0 36px;
+  padding: 20px 0 36px
 }
 
 .section-head .eyebrow {
@@ -583,17 +582,17 @@ body::after {
   color: var(--rust);
   font-size: 12px;
   letter-spacing: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 8px
 }
 
 .section-head h2 {
   font-size: clamp(34px, 5.5vw, 68px);
-  color: var(--white);
+  color: var(--white)
 }
 
 .fan-divider {
   margin-top: 20px;
-  opacity: 0.55;
+  opacity: 0.55
 }
 
 .deco-corner {
@@ -601,18 +600,18 @@ body::after {
   width: 26px;
   height: 26px;
   pointer-events: none;
-  opacity: 0.75;
+  opacity: 0.75
 }
 
 .deco-corner.tl {
   top: -1px;
-  left: -1px;
+  left: -1px
 }
 
 .deco-corner.br {
   bottom: -1px;
   right: -1px;
-  transform: rotate(180deg);
+  transform: rotate(180deg)
 }
 
 .db-grid {
@@ -622,7 +621,7 @@ body::after {
   position: relative;
   max-width: 1400px;
   margin: 0 auto;
-  padding-bottom: 100px;
+  padding-bottom: 100px
 }
 
 .mat-card {
@@ -634,14 +633,14 @@ body::after {
   transition: .3s ease;
   min-height: 280px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column
 }
 
 .mat-card:hover {
   transform: translateY(-4px);
   border-color: var(--brass);
   background: linear-gradient(175deg, #1c1712 0%, #120f0b 100%);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4)
 }
 
 .mat-card::before,
@@ -654,22 +653,22 @@ body::after {
   pointer-events: none;
   opacity: 0.7;
   border-top: 1px solid var(--brass);
-  transition: opacity .2s;
+  transition: opacity .2s
 }
 
 .mat-card::before {
   left: 0;
-  border-left: 1px solid var(--brass);
+  border-left: 1px solid var(--brass)
 }
 
 .mat-card::after {
   right: 0;
-  border-right: 1px solid var(--brass);
+  border-right: 1px solid var(--brass)
 }
 
 .mat-card:hover::before,
 .mat-card:hover::after {
-  opacity: 1;
+  opacity: 1
 }
 
 .mat-card .classcode {
@@ -678,14 +677,14 @@ body::after {
   letter-spacing: 2px;
   color: #6b5836;
   text-align: right;
-  margin-bottom: 2px;
+  margin-bottom: 2px
 }
 
 .mat-card .role {
   font-family: 'JetBrains Mono';
   font-size: 11px;
   color: var(--rust);
-  letter-spacing: 3px;
+  letter-spacing: 3px
 }
 
 .mat-card h3 {
@@ -694,14 +693,14 @@ body::after {
   margin: 6px 0 16px;
   color: var(--white);
   border-bottom: 1px solid #241d15;
-  padding-bottom: 12px;
+  padding-bottom: 12px
 }
 
 .stat-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 8px
 }
 
 .stat-row .label {
@@ -710,25 +709,25 @@ body::after {
   color: var(--cream);
   opacity: .6;
   width: 76px;
-  letter-spacing: 1px;
+  letter-spacing: 1px
 }
 
 .meter {
   flex: 1;
   display: flex;
-  gap: 3px;
+  gap: 3px
 }
 
 .meter i {
   flex: 1;
   height: 6px;
   background: #221c15;
-  border: 1px solid #3a2d1e;
+  border: 1px solid #3a2d1e
 }
 
 .meter i.fill {
   background: var(--brass);
-  border-color: #8a6a34;
+  border-color: #8a6a34
 }
 
 .mat-card .enter {
@@ -738,11 +737,11 @@ body::after {
   color: #6b5836;
   letter-spacing: 2px;
   padding-top: 24px;
-  border-top: 1px dashed #241d15;
+  border-top: 1px dashed #241d15
 }
 
 .mat-card:hover .enter {
-  color: var(--brass);
+  color: var(--brass)
 }
 
 .detail-top {
@@ -750,7 +749,7 @@ body::after {
   padding: 20px 0 36px;
   border-bottom: 2px solid var(--rust);
   background: linear-gradient(100deg, var(--near-black) 0%, var(--black) 65%);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 97%, 34% 100%, 0 98%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 97%, 34% 100%, 0 98%)
 }
 
 .back-btn {
@@ -761,16 +760,16 @@ body::after {
   border: none;
   cursor: pointer;
   letter-spacing: 2px;
-  margin-bottom: 24px;
+  margin-bottom: 24px
 }
 
 .back-btn:hover {
-  color: var(--brass);
+  color: var(--brass)
 }
 
 .detail-top h1 {
   font-size: clamp(46px, 9vw, 120px);
-  color: var(--white);
+  color: var(--white)
 }
 
 .detail-top .role-line {
@@ -778,7 +777,7 @@ body::after {
   color: var(--rust);
   letter-spacing: 4px;
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 13px
 }
 
 .detail-seal {
@@ -795,7 +794,7 @@ body::after {
   text-align: center;
   transform: rotate(-9deg);
   opacity: 0.55;
-  pointer-events: none;
+  pointer-events: none
 }
 
 .detail-seal span {
@@ -803,7 +802,7 @@ body::after {
   font-size: 9px;
   letter-spacing: 1px;
   color: var(--rust);
-  line-height: 1.3;
+  line-height: 1.3
 }
 
 .detail-body {
@@ -812,40 +811,40 @@ body::after {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 44px 56px;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 0 auto
 }
 
 @media (max-width:900px) {
   .detail-seal {
-    display: none;
+    display: none
   }
 
   .detail-body {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 }
 
 .detail-body>div:first-child {
-  margin-top: 10px;
+  margin-top: 10px
 }
 
 .dials-row {
   display: flex;
   gap: 22px;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 30px
 }
 
 .dial-block {
-  text-align: center;
+  text-align: center
 }
 
 .dial-block:nth-child(2) {
-  margin-top: 6px;
+  margin-top: 6px
 }
 
 .dial-block:nth-child(3) {
-  margin-top: -4px;
+  margin-top: -4px
 }
 
 .dial-label {
@@ -853,65 +852,65 @@ body::after {
   font-size: 10.5px;
   color: var(--cream);
   letter-spacing: 2px;
-  margin-top: 4px;
+  margin-top: 4px
 }
 
 .dial-val {
   font-family: 'JetBrains Mono';
   font-size: 12px;
   color: var(--brass);
-  margin-top: 2px;
+  margin-top: 2px
 }
 
 .pros-cons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
-  margin-top: 6px;
+  margin-top: 6px
 }
 
 .pc-box {
   border: 1px solid var(--line);
   padding: 16px;
   position: relative;
-  overflow: hidden;
+  overflow: hidden
 }
 
 .pc-box.pro {
-  margin-top: 8px;
+  margin-top: 8px
 }
 
 .pc-box h5 {
   font-family: 'JetBrains Mono';
   font-size: 11px;
   letter-spacing: 2px;
-  margin-bottom: 10px;
+  margin-bottom: 10px
 }
 
 .pc-box.pro h5 {
-  color: #4ade80;
+  color: #4ade80
 }
 
 .pc-box.con h5 {
-  color: var(--rust);
+  color: var(--rust)
 }
 
 .pc-box ul {
   list-style: none;
   font-size: 13px;
   line-height: 1.7;
-  color: var(--cream);
+  color: var(--cream)
 }
 
 .pc-box li::before {
-  content: '- ';
+  content: '- '
 }
 
 .pc-box.con {
   border-color: var(--rust);
   background:
     repeating-linear-gradient(135deg, rgba(168, 70, 31, 0.07) 0px, rgba(224, 27, 27, 0.06) 8px, transparent 8px, transparent 16px),
-    var(--near-black);
+    var(--near-black)
 }
 
 .pc-box.con::before {
@@ -929,12 +928,12 @@ body::after {
   letter-spacing: 2px;
   padding: 3px 0;
   transform: rotate(38deg);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .4)
 }
 
 .pc-box.con li {
   position: relative;
-  cursor: default;
+  cursor: default
 }
 
 .pc-box.con li .redact {
@@ -944,17 +943,17 @@ body::after {
   color: transparent;
   border-radius: 2px;
   padding: 0 3px;
-  transition: .3s;
+  transition: .3s
 }
 
 .pc-box.con li:hover .redact {
   background: transparent;
   color: var(--cream);
-  border-color: transparent;
+  border-color: transparent
 }
 
 .applications {
-  margin-top: 26px;
+  margin-top: 26px
 }
 
 .applications h4 {
@@ -962,7 +961,7 @@ body::after {
   font-size: 12px;
   letter-spacing: 3px;
   color: var(--rust);
-  margin-bottom: 12px;
+  margin-bottom: 12px
 }
 
 .app-tag {
@@ -973,7 +972,7 @@ body::after {
   padding: 6px 12px;
   margin: 0 6px 6px 0;
   letter-spacing: 1px;
-  color: var(--cream);
+  color: var(--cream)
 }
 
 .data-panel {
@@ -982,7 +981,7 @@ body::after {
   border: 1px solid var(--brass);
   padding: 22px;
   height: fit-content;
-  position: relative;
+  position: relative
 }
 
 .data-panel h4 {
@@ -990,7 +989,7 @@ body::after {
   font-size: 12px;
   letter-spacing: 3px;
   color: var(--rust);
-  margin-bottom: 14px;
+  margin-bottom: 14px
 }
 
 .data-row {
@@ -999,11 +998,11 @@ body::after {
   font-family: 'JetBrains Mono';
   font-size: 12px;
   padding: 9px 0;
-  border-top: 1px dashed var(--line);
+  border-top: 1px dashed var(--line)
 }
 
 .data-row span:last-child {
   color: var(--white);
   font-weight: 600;
-  text-align: right;
+  text-align: right
 }

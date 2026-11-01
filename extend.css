@@ -638,7 +638,7 @@ footer {
   --brass-bright: #f7d287;
   --rust: #ea6e3e;
   --white: #f8f1de;
-  --cream: #e6dbba;
+  --cream: #e6dbba
 }
 
 body {
@@ -646,7 +646,9 @@ body {
 }
 
 body::after {
-  background: radial-gradient(ellipse 70% 40% at 50% 0%, transparent 60%, rgba(0, 0, 0, .18) 100%), radial-gradient(ellipse 90% 45% at 50% 100%, transparent 60%, rgba(0, 0, 0, .18) 100%)
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, transparent 60%, rgba(0, 0, 0, .18) 100%),
+    radial-gradient(ellipse 90% 45% at 50% 100%, transparent 60%, rgba(0, 0, 0, .18) 100%)
 }
 
 .architecture {
@@ -928,7 +930,6 @@ body::after {
   color: #efe5c6
 }
 
-/* compare */
 .chip {
   border-color: #56776d;
   background: rgba(255, 255, 255, .04);
